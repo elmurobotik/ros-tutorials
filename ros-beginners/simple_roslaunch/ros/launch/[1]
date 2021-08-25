@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="simple_roslaunch" type="simple_client" name="simple_client_cpp" output="screen" >
+    <param name="count_articles" value="true"/>
+  </node>
+</launch>

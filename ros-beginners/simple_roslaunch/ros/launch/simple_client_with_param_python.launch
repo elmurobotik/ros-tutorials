@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="count_articles" default="false"/>
+  <node pkg="simple_roslaunch" type="simple_client_with_param.py" name="simple_client_python" output="screen" >
+    <param name="count_articles" value="$(arg count_articles)" />
+  </node>
+</launch>

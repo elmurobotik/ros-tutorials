@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="roscpp_simple_service_client" type="simple_server" name="simple_server_cpp" output="screen" />
+  <node pkg="rospy_simple_service_client" type="simple_server.py" name="simple_server_python" output="screen" />
+</launch>
