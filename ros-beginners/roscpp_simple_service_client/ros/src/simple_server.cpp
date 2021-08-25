@@ -10,21 +10,25 @@ bool serverCallback(ros_custom_msgs::CountWordsRequest &req,
   std::vector<std::string> words;
   boost::split(words, req.words.data, boost::is_any_of("\t "));
   
-  std::vector<std::string> english_articles = {"a", "an", "the"};
-  int num_of_articles = 0;
-  for (auto const& word: words)
+  resp.num_words.data = words.size();
+  
+  if (req.count_articles.data)
   {
-    std::string lower_word = boost::algorithm::to_lower_copy(word);
-    if (std::find(english_articles.begin(), english_articles.end(), 
-        lower_word ) != english_articles.end())
+    std::vector<std::string> english_articles = {"a", "an", "the"};
+    int num_of_articles = 0;
+    for (auto const& word: words)
     {
-      num_of_articles ++;
+      std::string lower_word = boost::algorithm::to_lower_copy(word);
+      if (std::find(english_articles.begin(), english_articles.end(), 
+          lower_word ) != english_articles.end())
+      {
+        num_of_articles ++;
+      }
     }
+    
+    resp.num_articles.data = num_of_articles;
+    resp.num_words.data -= num_of_articles;
   }
-  
-  resp.num_articles.data = num_of_articles;
-  resp.num_words.data = words.size() - num_of_articles;
-  
   return true;
 }
 
